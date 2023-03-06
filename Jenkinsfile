@@ -10,47 +10,46 @@ pipeline {
         stage ('Build image') {
             agent any
             steps {
-                script (
-                    sh ''' ls '''
+                script {
                     sh '''
                         docker build -t mndiayepro97/$IMAGE_NAME:$IMAGE_TAG .
-                    '''
-                )
+                        '''
+                }
             }
         }
 
         stage ('Run container based on builded image') {
             agent any
             steps {
-                script (
+                script {
                     sh '''
                         docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 mndiayepro97/$IMAGE_NAME:$IMAGE_TAG
                         sleep 5s
                     '''
-                )
+                }
             }
         }
 
         stage ('Test image') {
             agent any
             steps {
-                script (
+                script {
                     sh '''
                         curl http://localhost |grep -q "Hello world !"
                     '''
-                )
+                }
             }
         }
 
         stage ('Clean container') {
             agent any
             steps {
-                script (
+                script {
                     sh '''
                         docker stop $IMAGE_NAME
                         docker rm $IMAGE_NAME
                     '''
-                )
+                }
             }
         }
 
@@ -63,14 +62,14 @@ pipeline {
                     HEROKU_API_KEY = credentials('api_key_heroku')
                 }
                 steps {
-                    script (
+                    script {
                         sh '''
                             heroku container:login
                             heroku create $STAGING || echo "project already exists"
                             heroku container:push -a $STAGING web
                             heroku container:release -a $STAGING web
                         '''
-                    )
+                    }
                 }
         }
 
@@ -83,14 +82,14 @@ pipeline {
                     HEROKU_API_KEY = credentials('api_key_heroku')
                 }
                 steps {
-                    script (
+                    script {
                         sh '''
                             heroku container:login
                             heroku create $PRODUCTION || echo "project already exists"
                             heroku container:push -a $PRODUCTION web
                             heroku container:release -a $PRODUCTION web
                         '''
-                    )
+                    }
                 }
         }
     }

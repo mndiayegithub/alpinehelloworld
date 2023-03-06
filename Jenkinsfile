@@ -11,9 +11,9 @@ pipeline {
             agent any
             steps {
                 script (
-                    sh """
+                    sh '''
                         docker build -t mndiayepro97/$IMAGE_NAME:$IMAGE_TAG .
-                        """
+                    '''
                 )
             }
         }
@@ -22,10 +22,10 @@ pipeline {
             agent any
             steps {
                 script (
-                    sh """
+                    sh '''
                         docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 mndiayepro97/$IMAGE_NAME:$IMAGE_TAG
                         sleep 5s
-                    """
+                    '''
                 )
             }
         }
@@ -34,9 +34,9 @@ pipeline {
             agent any
             steps {
                 script (
-                    sh """
+                    sh '''
                         curl http://localhost |grep -q "Hello world !"
-                    """
+                    '''
                 )
             }
         }
@@ -45,10 +45,10 @@ pipeline {
             agent any
             steps {
                 script (
-                    sh """
+                    sh '''
                         docker stop $IMAGE_NAME
                         docker rm $IMAGE_NAME
-                    """
+                    '''
                 )
             }
         }
@@ -63,12 +63,12 @@ pipeline {
                 }
                 steps {
                     script (
-                        sh """
+                        sh '''
                             heroku container:login
                             heroku create $STAGING || echo "project already exists"
                             heroku container:push -a $STAGING web
                             heroku container:release -a $STAGING web
-                        """
+                        '''
                     )
                 }
         }
@@ -83,12 +83,12 @@ pipeline {
                 }
                 steps {
                     script (
-                        sh """
+                        sh '''
                             heroku container:login
                             heroku create $PRODUCTION || echo "project already exists"
                             heroku container:push -a $PRODUCTION web
                             heroku container:release -a $PRODUCTION web
-                        """
+                        '''
                     )
                 }
         }

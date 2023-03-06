@@ -11,9 +11,9 @@ pipeline {
             agent any
             steps {
                 script (
-                    sh '''
+                    sh """
                         docker build -t mndiayepro97/$IMAGE_NAME:$IMAGE_TAG .
-                        '''
+                        """
                 )
             }
         }

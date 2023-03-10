@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        curl http://$IMAGE_NAME:5000 |grep -q 'Hello world !'
+                        curl $IMAGE_NAME:5000 |grep -q 'Hello world !'
                     '''
                 }
             }

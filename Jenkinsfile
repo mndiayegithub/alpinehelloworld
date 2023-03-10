@@ -35,7 +35,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        curl http://$IMAGE_NAME:PORT |grep -q 'Hello world !'
+                        docker run --name $IMAGE_NAME 
+                        curl http://$IMAGE_NAME:5000 |grep -q 'Hello world !'
                     '''
                 }
             }

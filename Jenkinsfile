@@ -1,5 +1,5 @@
 /* import shared library */
-@Library('jenkins-shared-library')_
+@Library('jenkins-shared-library')
 
 pipeline {
     environment {
@@ -102,12 +102,3 @@ pipeline {
                 }
         }
     }
-    post {
-       always {
-        script {
-            slackNotifier currentBuild.result
-            }
-        }  
-    }
-}
-

@@ -1,4 +1,4 @@
-/* import shared library */
+/* impoort shared library */
 @Library('jenkins-shared-library') _
 
 pipeline {

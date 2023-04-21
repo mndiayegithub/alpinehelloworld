@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker run --name $IMAGE_NAME -d -v /var/run/docker.sock:/var/run/docker.sock -p 80:5000 --network jenkins_default -e PORT=5000 mndiayepro97/$IMAGE_NAME:$IMAGE_TAG
+                        docker run --name $IMAGE_NAME -d -p 80:5000 --network jenkins_default -e PORT=5000 mndiayepro97/$IMAGE_NAME:$IMAGE_TAG
                         sleep 5s
                     '''
                 }

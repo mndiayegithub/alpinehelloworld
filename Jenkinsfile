@@ -1,6 +1,3 @@
-/* import shared library */
-@Library('jenkins-shared-library')
-
 pipeline {
     environment {
         IMAGE_NAME = "alpinehelloworld"
@@ -102,3 +99,11 @@ pipeline {
                 }
         }
     }
+    post {
+       always {
+        script {
+            slackNotifier currentBuild.result
+            }
+        }  
+    }
+}

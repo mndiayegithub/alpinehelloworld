@@ -1,5 +1,6 @@
 /* import shared library */
 @Library('jenkins-shared-library') _
+slackNotifier
 
 pipeline {
     environment {

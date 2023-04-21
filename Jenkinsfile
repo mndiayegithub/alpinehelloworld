@@ -1,5 +1,5 @@
 /* import shared library */
-@Library('mndiaye-shared-library')
+@Library('jenkins-shared-library')
 
 pipeline {
     environment {
